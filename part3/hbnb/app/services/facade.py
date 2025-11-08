@@ -1,6 +1,7 @@
 """Facade module for business logic operations."""
 
-from app.persistence.repository import InMemoryRepository
+from app.persistence.repository import SQLAlchemyRepository
+from app.services.repositories.user_repository import UserRepository
 from app.models.user import User
 from app.models.amenity import Amenity
 from app.models.review import Review
@@ -17,10 +18,10 @@ class HBnBFacade:
 
     def __init__(self):
         """Initialize repositories for all entities."""
-        self.user_repo = InMemoryRepository()
-        self.place_repo = InMemoryRepository()
-        self.review_repo = InMemoryRepository()
-        self.amenity_repo = InMemoryRepository()
+        self.user_repo = UserRepository(User)
+        self.place_repo = SQLAlchemyRepository(Place)
+        self.review_repo = SQLAlchemyRepository(Review)
+        self.amenity_repo = SQLAlchemyRepository(Amenity)
 
     # User operations
     def create_user(self, user_data):
@@ -86,8 +87,8 @@ class HBnBFacade:
 
         # Create place_data copy without owner_id and add owner object
         place_args = place_data.copy()
-        place_args.pop('owner_id', None)  # Remove owner_id
-        place_args['owner'] = owner  # Add owner object
+        place_args.pop('owner_id', None)
+        place_args['owner'] = owner
 
         place = Place(**place_args)
         self.place_repo.add(place)
@@ -101,30 +102,23 @@ class HBnBFacade:
         return self.get_place(place_id)
 
     def create_review(self, review_data):
-        """Créer un avis et l'ajouter à la place correspondante."""
         user_id = review_data.get("user_id")
         place_id = review_data.get("place_id")
         rating = review_data.get("rating")
         text = review_data.get("text")
 
-        # Vérifie que l'utilisateur et le lieu existent
         user = self.user_repo.get(user_id)
         place = self.place_repo.get(place_id)
         if not user or not place:
             raise ValueError("Invalid user_id or place_id")
 
-        # Vérifie le rating
         if not isinstance(rating, int) or not (1 <= rating <= 5):
             raise ValueError("Rating must be an integer between 1 and 5")
 
-        # Crée la review
         new_review = Review(text=text, rating=rating,
                             user_id=user_id, place_id=place_id)
 
-        # Ajoute la review au repository
         self.review_repo.add(new_review)
-
-        # Lie la review au lieu
         place.add_review(new_review)
 
         return new_review
@@ -136,15 +130,11 @@ class HBnBFacade:
         return self.review_repo.get_all()
 
     def get_reviews_by_place(self, place_id):
-        place = self.place_repo.get(place_id)
         reviews = [r for r in self.review_repo.get_all()
                    if r.place_id == place_id]
         return reviews
 
     def update_review(self, review_id, review_data):
-        review = self.review_repo.get(review_id)
-
-        # Validate rating if provided
         rating = review_data.get('rating')
         if rating is not None and (not
                                    isinstance(rating,
@@ -167,14 +157,28 @@ class HBnBFacade:
         return amenity
 
     def get_amenity(self, amenity_id):
-        # Logic to retrieve an amenity by ID
         return self.amenity_repo.get(amenity_id)
 
+    def get_amenity_by_name(self, name):
+        """Retrieve an amenity by its name."""
+        return self.amenity_repo.get_by_attribute('name', name)
+
     def get_all_amenities(self):
-        # Placeholder for logic to retrieve all amenities
         return self.amenity_repo.get_all()
 
     def update_amenity(self, amenity_id, amenity_data):
-        # Placeholder for logic to update an amenity
         self.amenity_repo.update(amenity_id, amenity_data)
         return self.get_amenity(amenity_id)
+
+    def add_amenity_to_place(self, place_id, amenity_id):
+        place = self.place_repo.get(place_id)
+        amenity = self.amenity_repo.get(amenity_id)
+
+        if not place:
+            raise ValueError(f"Place with id {place_id} not found")
+        if not amenity:
+            raise ValueError(f"Amenity with id {amenity_id} not found")
+
+        place.add_amenity(amenity)
+        self.place_repo.save(place)
+        return place
