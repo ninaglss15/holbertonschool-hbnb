@@ -110,7 +110,6 @@ pip install -r requirements.txt
 
 
 ## 👥 Auteurs
-
 - Nina
 - Aurélie
 - Nicolai
