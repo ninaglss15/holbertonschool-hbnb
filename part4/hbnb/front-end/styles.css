@@ -1,0 +1,225 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 1rem;
+}
+
+main {
+    padding: 2rem;
+}
+
+/* ======================================= */
+/* AJOUT STYLES POUR TASK 0 - FRONT END */
+/* ======================================= */
+
+/* Body général */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #e8f0f2;
+    color: #222;
+}
+
+/* Header + logo */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2c3e50;
+    padding: 1rem 2rem;
+    border-bottom: 3px solid #1abc9c;
+}
+
+.logo {
+    height: 50px;
+}
+
+/* Navigation */
+nav {
+    display: flex;
+    gap: 1rem;
+}
+
+nav a, .login-button {
+    padding: 8px 16px;
+    background-color: #1abc9c;
+    color: #fff;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+nav a:hover, .login-button:hover {
+    background-color: #16a085;
+}
+
+/* Main et liste de places */
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#places-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.place-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.place-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.place-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+    margin-bottom: 10px;
+}
+
+.details-button {
+    margin-top: auto;
+    padding: 8px 16px;
+    background-color: #3498db;
+    color: #fff;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+.details-button:hover {
+    background-color: #2980b9;
+}
+
+/* Détails du logement */
+.place-details {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 20px;
+    width: 100%;
+    max-width: 650px;
+    margin: 20px 0;
+}
+
+.place-info {
+    margin-top: 15px;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    padding: 12px;
+}
+
+/* Reviews */
+.review-card {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 12px;
+    margin: 10px 0;
+    background-color: #fafafa;
+}
+
+/* Formulaires */
+.add-review {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 20px 0;
+    width: 100%;
+    max-width: 650px;
+    background-color: #fff;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #bbb;
+    margin-top: 8px;
+    font-size: 1rem;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: #1abc9c;
+    outline: none;
+}
+
+/* Boutons submit/login */
+.login-button, .add-review button {
+    background-color: #1abc9c;
+    color: #fff;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.login-button:hover, .add-review button:hover {
+    background-color: #16a085;
+}
+
+/* Footer */
+footer {
+    background-color: #2c3e50;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    border-top: 3px solid #1abc9c;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #places-list {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    nav {
+        flex-wrap: wrap;
+    }
+}
