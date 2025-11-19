@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Details</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+
+<body>
+    <header>
+        <a href="index.html">
+            <img src="images/logo.png" alt="BreakingBadBnB Logo" class="logo">
+        </a>
+
+        <nav>
+            <a href="index.html" class="login-button">Home</a>
+            <a href="login.html" class="login-button">Login</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- PLACE DETAILS -->
+        <section id="place-details">
+            <div class="place-details">
+                <h1 id="place-title"></h1>
+
+                <div class="place-info">
+                    <p><strong>Host:</strong> <span id="host-name"></span></p>
+                    <p><strong>Price:</strong> <span id="place-price"></span>€ / night</p>
+
+                    <p><strong>Description:</strong></p>
+                    <p id="place-description"></p>
+
+                    <p><strong>Amenities:</strong></p>
+                    <ul id="amenities-list"></ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- REVIEWS -->
+        <section id="reviews">
+            <h2>User Reviews</h2>
+            <div id="reviews-container"></div>
+        </section>
+
+        <!-- ADD REVIEW -->
+        <section id="add-review" style="display:none;">
+            <h2>Add a Review</h2>
+
+            <form id="review-form">
+                <label for="review-text">Your review:</label>
+                <textarea id="review-text" required></textarea>
+
+                <label for="review-rating">Rating (1–5):</label>
+                <select id="review-rating" required>
+                    <option value="">Select a rating</option>
+                    <option value="1">1 - Bad</option>
+                    <option value="2">2 - Meh</option>
+                    <option value="3">3 - Okay</option>
+                    <option value="4">4 - Good</option>
+                    <option value="5">5 - Amazing</option>
+                </select>
+
+                <button type="submit" class="login-button">Submit</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 BreakingBadBnB. All rights reserved.</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
