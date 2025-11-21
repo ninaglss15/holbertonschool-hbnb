@@ -2,21 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta-name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Review</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Review - BreakingBadBnB</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/icon.png') }}">
 </head>
 <body>
     <header>
-        <a href="index.html">
-            <img src="images/logo.png" class="logo" alt="App Logo">
+        <a href="{{ url_for('index') }}">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo" alt="BreakingBadBnB Logo">
         </a>
         <nav>
-            <a href="login.html" class="login-button" id="login-link">Login</a>
+            <a href="{{ url_for('index') }}" class="login-button">Home</a>
+            <a id="login-link" href="{{ url_for('login') }}" class="login-button" style="display:none;">Login</a>
+            <button id="logout-button" class="login-button" style="display:none;">Logout</button>
         </nav>
     </header>
 
     <main>
+        <div id="message"></div>
+        <!-- Identify which place the user is reviewing -->
+        <h3 id="place-name" style="text-align:center; margin-bottom:15px;"></h3>
+        
         <section id="add-review">
             <form id="review-form" class="form-container">
                 <h2>Add a Review</h2>
@@ -40,9 +47,9 @@
     </main>
 
     <footer>
-        <p>© 2025 MyApp. All rights reserved.</p>
+        <p>© 2025 - Holberton-HBnB - All Rights Reserved.</p>
     </footer>
 
-    <script src="scripts.js"></script>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </body>
 </html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of Places - BreakingBadBnB</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/icon.png') }}">
+</head>
+<body class="index-page">
+    <header>
+        <a href="{{ url_for('index') }}">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="BreakingBadBnB Logo" class="logo">
+        </a>
+        <nav>
+            <a id="login-link" href="{{ url_for('login') }}" class="login-button" style="display:none;">Login</a>
+            <button id="logout-button" class="login-button" style="display:none;">Logout</button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- PRICE FILTER SECTION -->
+        <section id="filter">
+            <h2>Filter Places by Price</h2>
+
+            <label for="price-filter">Max Price:</label>
+            <select id="price-filter">
+                <option value="all">All</option>
+                <option value="10">10 credits</option>
+                <option value="50">50 credits</option>
+                <option value="100">100 credits</option>
+            </select>
+        </section>
+
+        <!-- PLACES LIST -->
+        <section id="places-list">
+            <!-- Les logements seront chargés dynamiquement ici -->
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 - Holberton-HBnB - All Rights Reserved.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>
