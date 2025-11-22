@@ -54,37 +54,25 @@ document.addEventListener('DOMContentLoaded', () => {
             displayMessage('No place ID provided.', 'error');
         }
 
-        const reviewForm = document.getElementById('review-form');
-        if (reviewForm && token) {
-            reviewForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const reviewText = document.getElementById('review-text').value;
-                const rating = document.getElementById('review-rating').value;
-                if (!reviewText.trim() || !rating) {
-                    displayMessage('Please fill all fields.', 'warning');
-                    return;
-                }
-                try {
-                    await submitReview(token, placeId, reviewText, rating);
-                    reviewForm.reset();
-                    setTimeout(() => fetchPlaceDetails(token, placeId), 1000);
-                } catch (error) {
-                    displayMessage(error.message, 'error');
-                }
-            });
-        }
+        
     }
 
     // ========== TASK 4: ADD REVIEW PAGE ==========
     const reviewFormPage = document.getElementById('add-review');
-    if (reviewFormPage) {
+    if (reviewFormPage && !document.getElementById('place-details')) { // Éviter conflit avec place.html
         const token = checkAuthenticationOrRedirect();
+        if (!token) return; // Si pas de token, on est déjà redirigé
+        
         const placeId = getPlaceIdFromURL();
         if (!placeId) {
             displayMessage('No place ID provided.', 'error');
             setTimeout(() => { window.location.href = '/'; }, 2000);
             return;
         }
+        
+        // Charger le nom du place
+        loadPlaceName(placeId);
+        
         const reviewForm = document.getElementById('review-form');
         if (reviewForm) {
             reviewForm.addEventListener('submit', async (e) => {
@@ -285,9 +273,21 @@ function getPlaceIdFromURL() {
 }
 
 function checkAuthenticationForPlace(token) {
-    const addReviewSection = document.getElementById('add-review');
-    if (addReviewSection) {
-        addReviewSection.style.display = token ? 'block' : 'none';
+    const addReviewButtonSection = document.getElementById('add-review-button-section');
+    const addReviewLink = document.getElementById('add-review-link');
+    
+    if (!token) {
+        // Pas authentifié : cacher le bouton
+        if (addReviewButtonSection) addReviewButtonSection.style.display = 'none';
+    } else {
+        // Authentifié : afficher le bouton
+        if (addReviewButtonSection) addReviewButtonSection.style.display = 'block';
+        
+        // Mettre à jour le lien avec le place_id
+        if (addReviewLink) {
+            const placeId = getPlaceIdFromURL();
+            addReviewLink.href = `/add_review?id=${placeId}`;
+        }
     }
 }
 
@@ -372,6 +372,24 @@ function checkAuthenticationOrRedirect() {
         return null;
     }
     return token;
+}
+
+/**
+ * Charge et affiche le nom du place sur add_review.html
+ */
+async function loadPlaceName(placeId) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/v1/places/${placeId}`);
+        if (response.ok) {
+            const place = await response.json();
+            const placeNameEl = document.getElementById('place-name');
+            if (placeNameEl) {
+                placeNameEl.textContent = `Review for: ${place.name || 'Unknown Place'}`;
+            }
+        }
+    } catch (error) {
+        console.error('Failed to load place name:', error);
+    }
 }
 
 async function submitReview(token, placeId, reviewText, rating) {

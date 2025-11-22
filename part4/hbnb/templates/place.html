@@ -52,29 +52,14 @@
                 <!-- Reviews will be inserted here as .review-card -->
                 <p style="color: #66BB6A; text-align: center;">Loading reviews...</p>
             </div>
+
         </section>
 
-        <!-- ADD REVIEW FORM (visible uniquement si authentifié) -->
-        <section id="add-review" style="display:none;">
-            <h2>Add a Review</h2>
-
-            <form id="review-form">
-                <label for="review-text">Your review:</label>
-                <textarea id="review-text" required></textarea>
-
-                <label for="review-rating">Rating (1–5):</label>
-                <select id="review-rating" required>
-                    <option value="">Select a rating</option>
-                    <option value="1">1 - Bad</option>
-                    <option value="2">2 - Meh</option>
-                    <option value="3">3 - Okay</option>
-                    <option value="4">4 - Good</option>
-                    <option value="5">5 - Amazing</option>
-                </select>
-
-                <button type="submit" class="submit-button">Submit Review</button>
-            </form>
-        </section>
+        <div id="add-review-button-section" style="display:none; text-align:center; margin:30px 0;">
+            <a id="add-review-link" href="#" class="details-button" style="display:inline-block; text-decoration:none;">
+                📝 Add a Review
+            </a>
+        </div>
     </main>
 
     <footer>

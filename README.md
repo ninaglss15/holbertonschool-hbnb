@@ -64,7 +64,45 @@ Cette étape rend le back-end prêt pour un déploiement réel.
 ---
 
 ### 4️⃣ HBnB - Simple Web Client
-...
+
+This fourth part marks the transition to the front-end: the goal was to build a simple, modern, and dynamic web interface that interacts directly with the API developed in the previous phases.
+
+## Main Objectives
+- Build a responsive interface using HTML5 / CSS3 / JavaScript ES6
+- Display real-time data through AJAX / Fetch API requests
+- Handle user authentication via JWT stored in cookies
+- Enable navigation without full page reloads (SPA-like behavior)
+- Connect all client pages to the API (places, reviews, login, etc.)
+
+##  What Has Been Implemented
+**Task 1 — Design**
+- Integration of pages: Login, List of Places, Place Details, Add Review
+- Usage of provided HTML/CSS files as a base
+- Creation of a clean design with cards, sections, navigation bar, footer, etc.
+
+**Task 2 — Login**
+
+- Sending credentials to the API
+- Retrieving the JWT and storing it securely in cookies
+- Automatic redirection after successful login
+- Error handling for invalid credentials
+
+**Task 3 — Index (Places)**
+- Fetching all places via the API
+- Dynamic display of place cards
+- Client-side filtering (by price) without page reload
+- Displaying the Login button only for visitors
+
+**Task 4 — Place Details**
+- Fetching place details via its ID in the URL
+- Dynamic display of information: description, host, price, amenities
+- Listing of existing reviews
+- Displaying the “Add Review” button only if the user is logged in
+
+**Task 5 — Add Review**
+- Form submission to the API via POST + JWT
+- Automatic redirection if the user is not logged in
+- Integrated success and error messages
 
 ---
 

@@ -21,18 +21,19 @@
 
     <main>
         <div id="message"></div>
+        
         <!-- Identify which place the user is reviewing -->
-        <h3 id="place-name" style="text-align:center; margin-bottom:15px;"></h3>
+        <h2 id="place-name" style="text-align:center; margin-bottom:15px; color:#66BB6A;">Loading place...</h2>
         
         <section id="add-review">
             <form id="review-form" class="form-container">
                 <h2>Add a Review</h2>
 
-                <label for="review">Your Review</label>
-                <textarea id="review" required></textarea>
+                <label for="review">Your Review:</label>
+                <textarea id="review" name="review" required></textarea>
 
-                <label for="rating">Rating</label>
-                <select id="rating" required>
+                <label for="rating">Rating:</label>
+                <select id="rating" name="rating" required>
                     <option value="" disabled selected>Select a rating</option>
                     <option value="1">1 - Poor</option>
                     <option value="2">2 - Fair</option>
