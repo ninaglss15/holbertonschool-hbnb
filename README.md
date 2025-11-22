@@ -13,10 +13,6 @@ Le projet est conçu selon une **architecture modulaire** et suit une progressio
 - [🏗️ Architecture du projet](#️-architecture-du-projet)
 - [🧩 Fonctionnalités principales](#-fonctionnalités-principales)
 - [⚙️ Installation & Démarrage](#️-installation--démarrage)
-- [📡 Exemples d’utilisation (curl)](#-exemples-dutilisation-curl)
-- [🧪 Tests automatisés](#-tests-automatisés)
-- [🧰 Stack technique](#-stack-technique)
-- [👥 Auteurs](#-auteurs)
 
 ---
 
